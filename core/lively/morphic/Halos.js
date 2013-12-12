@@ -334,6 +334,9 @@ lively.morphic.Halo.subclass('lively.morphic.ResizeHalo',
         this.targetMorph.halos.invoke('alignAtTarget');
     },
     dragEndAction: function(evt) {
+        if (this.targetMorph.onResizeEnd){
+            this.targetMorph.onResizeEnd();
+        }
         this.targetMorph.removeHalos();
         this.targetMorph.showHalos();
     },
