@@ -341,6 +341,9 @@ lively.morphic.Halo.subclass('lively.morphic.ResizeHalo',
         this.targetMorph.showHalos();
     },
     dragStartAction: function(evt) {
+        if (this.targetMorph.onResizeStart){
+            this.targetMorph.onResizeStart();
+        }
         this.targetMorph.removeHalosWithout(this.world(), [this, this.getBoundsHalo()]);
     }
 });
