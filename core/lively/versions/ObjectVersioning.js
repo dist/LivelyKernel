@@ -281,13 +281,13 @@ Object.extend(lively.versions.ObjectVersioning, {
             // === helpers ===
             isProxy: function() { return true },
             proxyTarget: function() { return this.targetObject() },
-			
-			targetObject: function() {
+            
+            targetObject: function() {
                 return this.targetObjectInVersion(lively.CurrentVersion);
             },
             targetObjectInVersion: function(version) {
                 var targetObject;
-
+                
                 while(!targetObject && version) {
                     targetObject = this.__targetVersions[version.ID];
                     version = version.previousVersion;
@@ -928,14 +928,14 @@ Object.extend(lively.versions.ObjectVersioning, {
     },
     moveTo: function(version, callback) {
         var oldCurrent = lively.CurrentVersion;
-		lively.CurrentVersion = version;
-		lively.doWithoutVersioning(function() {
-			$world.updateFrom(oldCurrent);
-		})
+        lively.CurrentVersion = version;
+        lively.doWithoutVersioning(function() {
+            $world.updateFrom(oldCurrent);
+        })
         if (callback) callback();
-		return version;
+        return version;
     },
-	undo: function(callback) {
+    undo: function(callback) {
         var predecessor = this.previousVersion();
         if (!predecessor) {
             throw new Error('Can\'t undo: No previous version.');
@@ -1223,6 +1223,6 @@ lively.transformSource = livelyOV.transformSource.bind(livelyOV);
 
 // ----- GLOBAL ACTIVATION -----
 
-lively.versions.ObjectVersioning.start();
+lively.versions.ObjectVersioning.init();
 
 });
