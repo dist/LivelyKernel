@@ -1055,8 +1055,6 @@ lively.morphic.Morph.addMethods(
 			var wasAdded = -1 == index;
 			if (wasAdded) {
 				this.addSubmorphToRenderContext(ea);
-				// this.removeMorph(ea);
-				// 	this.addMorph(ea, this.submorphs[index]);
 			}
 		}.bind(this));
 		
@@ -1065,16 +1063,20 @@ lively.morphic.Morph.addMethods(
 			var wasRemoved = -1 == index;
 			if (wasRemoved) {
 				this.removeSubmorphFromRenderContext(ea);
-				// this.submorphs.push(ea);
-				// 	this.removeMorph(ea);
 			}
 		}.bind(this));
 	},
     updateFrom: function(oldVersion) {
-  		this.updateChangedPropertiesFrom(oldVersion);
+		
+		this.updateChangedPropertiesFrom(oldVersion);
 		this.updateAddedAndRemovedSubmorphsFrom(oldVersion);
 		
-		this.submorphs.forEach(function(ea) {
+		var submorphsToUpdate = 
+			(this === $world) ? 
+				this.submorphs.without(this.submorphs.last()) : 
+				this.submorphs;
+		
+		submorphsToUpdate.forEach(function(ea) {
 			ea.updateFrom(oldVersion);
 		});
     }
