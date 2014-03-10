@@ -3992,7 +3992,7 @@ exports.commands = [{
     readOnly: true
 }, {
     name: "foldall",
-    bindKey: bindKey("Ctrl-Alt-0", "Ctrl-Command-Option-0"),
+    bindKey: bindKey("Ctrl-Alt-Shift-0", "Ctrl-Command-Option-0"),
     exec: function(editor) { editor.session.foldAll(); },
     scrollIntoView: "center",
     readOnly: true
